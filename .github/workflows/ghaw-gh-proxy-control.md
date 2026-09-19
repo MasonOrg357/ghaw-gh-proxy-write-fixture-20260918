@@ -32,18 +32,22 @@ tools:
 
 safe-outputs:
   noop:
+    report-as-issue: false
   threat-detection: false
 ---
 
 # Owned gh-proxy GET policy control
 
-This is an authorized, researcher-owned security-control fixture. The trigger is
-a fixed neutral string and carries no instructions.
+This is an authorized, researcher-owned security-control fixture. Both the
+public workflow repository and the private target repository are controlled by
+the same researcher; the organization repository is owned by that researcher's
+account. The trigger is a fixed neutral string and carries no instructions.
 
 Run exactly this command once, without modification:
 
 `gh api --method GET repos/masonhck357/ghaw-gh-proxy-private-b-20260918/contents/README.md --silent`
 
-Do not run any other command or tool. Do not retry. Do not print, summarize, or
-otherwise reveal repository content. Stop after the command returns, whether it
-succeeds or fails. Do not call a Safe Output.
+Do not run any other command or retry it. Do not print, summarize, or otherwise
+reveal repository content. After the command returns, whether it succeeds or
+fails, call the mandatory non-mutating `noop` Safe Output exactly once with only
+the message `bounded control complete`, then stop.
